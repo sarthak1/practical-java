@@ -1,5 +1,9 @@
 package com.course.practicaljava.rest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +24,8 @@ public class CarRestController {
 	@Autowired
 	private CarService carService;
 
+	private Random random = new Random();
+
 	@GetMapping(path = "/random")
 	public Car random() {
 		return carService.generateCar();
@@ -30,6 +36,18 @@ public class CarRestController {
 
 		log.info("This car is :-" + car);
 		return carService.generateCar();
+	}
+
+	@GetMapping(path = "/random-cars")
+	public List<Car> randomCars() {
+
+		List<Car> result = new ArrayList<>();
+
+		for (int i = 0; i < random.nextInt(carService.ADDITIONAL_FEATURES.size()+1); i++) {
+			result.add(carService.generateCar());
+
+		}
+		return result;
 	}
 
 }

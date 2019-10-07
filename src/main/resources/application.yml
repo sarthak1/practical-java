@@ -1,2 +1,20 @@
 server:
   port: 8001
+
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes : localhost:9300
+      cluster-name : elasticsearch
+
+elasticsearch:
+  index.name: my_index
+elasticsearch:
+  user:
+    type : user
